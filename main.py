@@ -1,11 +1,13 @@
 import discord
-from discord.ext import commands as cmds
+import json
 import os
+import pathlib
 
-token = "OTcyMDU2OTUzNjE2NDk0NjEy.YnTglQ.pOQQoSkl7pTr-nw_VdtswGyEzjA"
+bot = discord.Bot()
+Path = pathlib.Path().absolute()
 
-bot = discord.Bot(command_prefix='=')
-
+with open(fr'{Path}/config.json', 'r', encoding='utf8') as jfile:
+    jdata = json.load(jfile)
 
 @bot.event
 async def on_ready():
@@ -18,10 +20,11 @@ for filename in os.listdir('./cogs'):
 
 @bot.slash_command(name = "reload", description = "reload")
 async def reload(ctx):
-        for filename in os.listdir('./cogs'):
-            if filename.endswith('.py'):
-                bot.unload_extension(f'cogs.{filename[:-3]}')
-                bot.load_extension(f'cogs.{filename[:-3]}')
-            await ctx.respond(f'{filename} Reloaded')
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            bot.unload_extension(f'cogs.{filename[:-3]}')
+            bot.load_extension(f'cogs.{filename[:-3]}')
+    await ctx.respond('✅')
+            
 
-bot.run(token)
+bot.run(jdata['token'])
