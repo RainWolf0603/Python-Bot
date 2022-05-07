@@ -7,9 +7,10 @@ bot = discord.Bot()
 
 servers = [] #server ids
 
-@bot.event
-async def on_ready():
-    print("We have logged in!")
+
+class say(cmds.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
 @bot.slash_command(guild_ids = servers, name = "ban", description = "Bans a member")
 @commands.has_permissions(ban_members = True, administrator = True)
@@ -52,3 +53,7 @@ async def kickerror(ctx, error):
     else:
         await ctx.respond("Something went wrong...") #most likely due to missing permissions 
         raise error
+
+
+def setup(bot):
+    bot.add_cog(mod(bot))
