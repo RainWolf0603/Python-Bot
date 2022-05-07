@@ -2,7 +2,6 @@ import discord
 import json
 import os
 import pathlib
-
 bot = discord.Bot()
 Path = pathlib.Path().absolute()
 
@@ -25,6 +24,5 @@ async def reload(ctx):
             bot.unload_extension(f'cogs.{filename[:-3]}')
             bot.load_extension(f'cogs.{filename[:-3]}')
     await ctx.respond('✅')
-            
 
 bot.run(jdata['token'])
