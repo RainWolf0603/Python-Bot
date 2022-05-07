@@ -105,8 +105,7 @@ class stock(commands.Cog):
             embed.add_field(name="漲跌幅", value=bruh, inline=False)
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/852190878951931924/872040448699543582/Ankimochan.png")
             embed.set_footer(text="資料 from 台灣證券交易所,\n整理 by 愛你的小空❤️,\n原作 by droppey", icon_url="https://cdn.discordapp.com/attachments/852190878951931924/872039546253082684/sora.jpg")
-            await ctx.respond("查詢結果如下")
-            await ctx.send(embed=embed)
+            await ctx.respond(embed=embed)
         elif stock in data2.values:
             bruh = ("%.2f%%" % (100 * float(data2.loc[data2['STOCK_SYMBOL'] == stock].PRICE_CHANGE.to_string(index=False)) / (float(data2.loc[data2['STOCK_SYMBOL'] == stock].CLOSE.to_string(index=False)) + float(data2.loc[data2['STOCK_SYMBOL'] == stock].PRICE_CHANGE.to_string(index=False)))))
             embed = discord.Embed(title=(data2.loc[data2['STOCK_SYMBOL'] == stock].NAME.to_string(index=False)), description= (str(stock)), colour=np.random.randint(0, 16777215))
@@ -117,8 +116,7 @@ class stock(commands.Cog):
             embed.add_field(name="漲跌幅", value=bruh, inline=False)
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/852190878951931924/872040448699543582/Ankimochan.png")
             embed.set_footer(text="資料 from 櫃檯買賣中心,\n整理 by 愛你的小空❤️\n原作 by droppey", icon_url="https://cdn.discordapp.com/attachments/852190878951931924/872039546253082684/sora.jpg")
-            await ctx.respond("查詢結果如下")
-            await ctx.send(embed=embed)
+            await ctx.respond(embed=embed)
         else:
             await ctx.respond('幹！這根本不是股票代碼！')
 def setup(bot):
