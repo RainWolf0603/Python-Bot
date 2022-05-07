@@ -8,7 +8,7 @@ bot = discord.Bot()
 servers = [] #server ids
 
 
-class say(cmds.Cog):
+class mod(cmds.Cog):
     def __init__(self, bot):
         self.bot = bot
 
