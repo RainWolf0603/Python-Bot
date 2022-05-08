@@ -27,4 +27,6 @@ async def reload(ctx):
             bot.load_extension(f'cogs.{filename[:-3]}')
     await ctx.respond('✅')
 
+
+
 bot.run(jdata['token'])

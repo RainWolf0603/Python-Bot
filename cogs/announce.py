@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands as cmds
 from discord.commands import Option
-from discord.ext.commands import MissingPermissions
 
 bot = discord.Bot()
 
@@ -22,8 +21,8 @@ class announce(cmds.Cog):
         await ctx.send(embed=embed)
 
     @announce.error
-    async def error(ctx, error):
-        if isinstance(error, MissingPermissions):
+    async def error(self,ctx, error):
+        if isinstance(error, cmds.MissingPermissions):
             await ctx.respond("你沒有管理員權限!")
         else:
             await ctx.respond("Something went wrong...")
