@@ -4,6 +4,29 @@ from discord.commands import Option
 
 bot = discord.Bot()
 
+def numeric(lol):
+    if lol == '1':
+        lol = ':one:'
+    if lol == '2':
+        lol = ':two:'
+    if lol == '3':
+        lol = ':three:'
+    if lol == '4':
+        lol = ':four:'
+    if lol == '5':
+        lol = ':five:'
+    if lol == '6':
+        lol = ':six:'
+    if lol == '7':
+        lol = ':seven:'
+    if lol == '8':
+        lol = ':eight:'
+    if lol == '9':
+        lol = ':nine:'
+    if lol == '0':
+        lol = ':zero:'
+    return lol
+
 class emoji(cmds.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -18,9 +41,12 @@ class emoji(cmds.Cog):
                 reply = reply + char
             elif char.isascii() == False:
                 reply = reply+char
+            elif char.isnumeric() == True:
+                reply = reply + numeric(char)
             else:
                 reply= reply + ':regional_indicator_' + char + ':'
         await ctx.respond(reply)
+        
 
     @bot.slash_command(name = "表情符號階梯", description = "字面上的意思")
     async def xd(self,ctx,字串 : Option(str)):
