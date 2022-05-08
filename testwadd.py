@@ -1,4 +1,6 @@
-中文字串 = u'哈哈屁眼'
-List = []
-for Ch in 中文字串:
-    List.append(Ch)
+a = input('')
+b = list(a)
+c = len(a)
+for char in b:
+    print('字' + char)
+print(c)
