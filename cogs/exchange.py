@@ -16,23 +16,26 @@ class exchange(cmds.Cog):
         self.bot = bot
 
     @bot.slash_command(name = "匯率轉換", description = "換錢")
-    async def usd(self, ctx, 幣值 : Option(str,"請選擇幣值",choices=["美金", "港幣","歐元","人民幣","日幣"]), 金額 : Option(int,"請輸入轉換金額")):
+    async def usd(self, ctx, 幣值 : Option(str,"請選擇幣值",choices=["USD", "HKD","EUR","CNY","JPY"]), 金額 : Option(int,"請輸入轉換金額")):
         member = ctx.author
         userAvatar = member.avatar
-        embed = discord.Embed(title=(f'台幣轉換{幣值}'), description=(f'{金額}') + f'元{幣值}金換算新台幣為:')
-        #放在下面才if是因為上面的{幣值}才會變成中文
-        if 幣值 == "美金": 幣值 = "USD"
-        if 幣值 == "港幣": 幣值 = "HKD"
-        if 幣值 == "歐元": 幣值 = "EUR"
-        if 幣值 == "人民幣": 幣值 = "CNY"
-        if 幣值 == "日幣": 幣值 = "JPY"
-        embed.add_field(name='新台幣:', value=(str(twder.now(f'{幣值}')[1])), inline=True)
+        if 幣值 == 'USD':
+            dollar = 金額 * float(usd[1])
+        if 幣值 == 'HKD':
+            dollar = 金額 * float(hkd[1])
+        if 幣值 == 'EUR':
+            dollar = 金額 * float(eur[1])
+        if 幣值 == 'CNY':
+            dollar = 金額 * float(cny[1])
+        if 幣值 == 'JPY':
+            dollar = 金額 * float(jpy[1])
+        
+        embed = discord.Embed(title=(f'台幣轉換{幣值}'), description=(f'{金額}') + f'元{幣值}換算新台幣為:')
+        embed.add_field(name='新台幣:', value=(f"{dollar}"), inline=True)
         embed.add_field(name="上次更新時間", value=usd[0], inline=False)
         embed.set_footer(text=('Request by '  + str(member)), icon_url=userAvatar)
         await ctx.respond(embed=embed)
 
         
-
-
 def setup(bot):
     bot.add_cog(exchange(bot))
