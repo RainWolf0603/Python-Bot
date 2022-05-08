@@ -37,12 +37,10 @@ class emoji(cmds.Cog):
         b = list(字串)
         reply = ''
         for char in b:
-            if char.isspace() == True:
+            if char.isnumeric() == True:
+                reply = reply+ numeric(char)
+            elif char.isascii() == False or char.isalpha() == False or char.isspace() == True:
                 reply = reply + char
-            elif char.isascii() == False:
-                reply = reply+char
-            elif char.isnumeric() == True:
-                reply = reply + numeric(char)
             else:
                 reply= reply + ':regional_indicator_' + char + ':'
         await ctx.respond(reply)
