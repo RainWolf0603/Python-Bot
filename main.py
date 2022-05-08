@@ -2,6 +2,7 @@ import discord
 import json
 import os
 import pathlib
+from discord.ext import commands as cmds
 bot = discord.Bot()
 Path = pathlib.Path().absolute()
 
@@ -18,6 +19,7 @@ for filename in os.listdir('./cogs'):
         
 
 @bot.slash_command(name = "reload", description = "reload")
+@cmds.has_permissions(administrator = True)
 async def reload(ctx):
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
